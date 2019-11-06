@@ -13,50 +13,45 @@ let kViewControllerPlaybackServicePolicyKey = "BCpkADawqM3n0ImwKortQqSZCgJMcyVbb
 let kViewControllerAccountID = "4800266849001"
 let kViewControllerVideoID = "5255514387001"
 
-class ViewController: UIViewController {
+class ViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SampleCollectionViewCell", for: indexPath) as! SampleCollectionViewCell
+        
+        setupPlayer(forView: cell.videoContainerView)
+        
+        return cell
+    }
+    
     
     let sharedSDKManager = BCOVPlayerSDKManager.shared()
     let playbackService = BCOVPlaybackService(accountId: kViewControllerAccountID, policyKey: kViewControllerPlaybackServicePolicyKey)
     let playbackController :BCOVPlaybackController
-    @IBOutlet weak var videoContainerView: UIView!
-    
+
     required init?(coder aDecoder: NSCoder) {
         playbackController = (sharedSDKManager?.createPlaybackController())!
-        
+
         super.init(coder: aDecoder)
-        
+
         playbackController.delegate = self
         playbackController.isAutoAdvance = true
         playbackController.isAutoPlay = true
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
-        // Set up our player view. Create with a standard VOD layout.
-        let options = BCOVPUIPlayerViewOptions()
-        options.showPictureInPictureButton = true
-        
-        guard let playerView = BCOVPUIPlayerView(playbackController: self.playbackController, options: options, controlsView: BCOVPUIBasicControlView.withVODLayout()) else {
-            return
-        }
-        
-        playerView.delegate = self
-        
-        // Install in the container view and match its size.
-        self.videoContainerView.addSubview(playerView)
-        playerView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            playerView.topAnchor.constraint(equalTo: self.videoContainerView.topAnchor),
-            playerView.rightAnchor.constraint(equalTo: self.videoContainerView.rightAnchor),
-            playerView.leftAnchor.constraint(equalTo: self.videoContainerView.leftAnchor),
-            playerView.bottomAnchor.constraint(equalTo: self.videoContainerView.bottomAnchor)
-        ])
-        
-        // Associate the playerView with the playback controller.
-        playerView.playbackController = playbackController
-        
-        requestContentFromPlaybackService()
     }
     
     func requestContentFromPlaybackService() {
@@ -70,7 +65,37 @@ class ViewController: UIViewController {
         }
     }
 
+    func setupPlayer(forView videoContainerView: UIView){
+        
+                 //Set up our player view. Create with a standard VOD layout.
+                let options = BCOVPUIPlayerViewOptions()
+                options.showPictureInPictureButton = true
+        
+                guard let playerView = BCOVPUIPlayerView(playbackController: self.playbackController, options: options, controlsView: BCOVPUIBasicControlView.withVODLayout()) else {
+                    return
+                }
+        
+                playerView.delegate = self
+        
+                // Install in the container view and match its size.
+                videoContainerView.addSubview(playerView)
+                playerView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    playerView.topAnchor.constraint(equalTo: videoContainerView.topAnchor),
+                    playerView.rightAnchor.constraint(equalTo: videoContainerView.rightAnchor),
+                    playerView.leftAnchor.constraint(equalTo: videoContainerView.leftAnchor),
+                    playerView.bottomAnchor.constraint(equalTo: videoContainerView.bottomAnchor)
+                ])
+        
+                // Associate the playerView with the playback controller.
+                playerView.playbackController = playbackController
+        
+                requestContentFromPlaybackService()
+        
+    }
+    
 }
+
 
 extension ViewController: BCOVPlaybackControllerDelegate {
     
