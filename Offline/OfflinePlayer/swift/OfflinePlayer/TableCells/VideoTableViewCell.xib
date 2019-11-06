@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,26 +12,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QJ3-lV-nBz" id="mbn-Sz-5qp">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xxp-Bx-dRW">
-                        <rect key="frame" x="127" y="11" width="191" height="47"/>
+                        <rect key="frame" x="126" y="11" width="192" height="47"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEP-QQ-V8y">
-                                <rect key="frame" x="0.0" y="0.0" width="191" height="20.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="192" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Duration / Size" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXe-v4-JVM">
-                                <rect key="frame" x="0.0" y="25.5" width="191" height="14.5"/>
+                                <rect key="frame" x="0.0" y="25.5" width="192" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bNx-MW-725">
-                                <rect key="frame" x="0.0" y="45" width="191" height="2"/>
+                                <rect key="frame" x="0.0" y="45" width="192" height="2"/>
                                 <color key="tintColor" red="0.24892729920000001" green="0.1381546025" blue="0.24417504509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                         </subviews>
@@ -45,13 +42,15 @@
                             <constraint firstAttribute="height" constant="32" id="Ual-5A-kkM"/>
                             <constraint firstAttribute="width" secondItem="Vdu-TR-BB6" secondAttribute="height" multiplier="1:1" id="e0x-zs-06v"/>
                         </constraints>
-                        <state key="normal" image="inprogress.png"/>
+                        <state key="normal" image="inprogress.png">
+                            <color key="titleColor" red="0.87450980392156863" green="0.90196078431372551" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
                         <connections>
                             <action selector="downloadButtonPressed:" destination="QJ3-lV-nBz" eventType="touchUpInside" id="w2o-ME-bdO"/>
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aKF-7e-NxX">
-                        <rect key="frame" x="16" y="11" width="99" height="56"/>
+                        <rect key="frame" x="15" y="11" width="99" height="56"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="99" id="RY0-Lv-24U"/>
                             <constraint firstAttribute="width" secondItem="aKF-7e-NxX" secondAttribute="height" multiplier="99:56" id="YSU-Z8-ESr"/>

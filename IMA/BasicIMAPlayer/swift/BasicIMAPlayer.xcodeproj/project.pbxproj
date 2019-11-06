@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B32422043C41E527A9A921C2 /* Pods_BasicIMAPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8AE1CDB744F823434EBFA2 /* Pods_BasicIMAPlayer.framework */; };
 		E93A3D0E217A1D5900F971F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A3D0D217A1D5900F971F8 /* AppDelegate.swift */; };
 		E93A3D10217A1D5900F971F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A3D0F217A1D5900F971F8 /* ViewController.swift */; };
 		E93A3D13217A1D5900F971F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93A3D11217A1D5900F971F8 /* Main.storyboard */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E8AE1CDB744F823434EBFA2 /* Pods_BasicIMAPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasicIMAPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90C4E537574A78CF92E4ADDE /* Pods-BasicIMAPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicIMAPlayer.release.xcconfig"; path = "Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		E8EF12D6B38FDB0721B996EF /* Pods-BasicIMAPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicIMAPlayer.debug.xcconfig"; path = "Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		E93A3D0A217A1D5900F971F8 /* BasicIMAPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicIMAPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93A3D0D217A1D5900F971F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E93A3D0F217A1D5900F971F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B32422043C41E527A9A921C2 /* Pods_BasicIMAPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C8E2C9E5D21E5A4842A5303 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E8AE1CDB744F823434EBFA2 /* Pods_BasicIMAPlayer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B7993583B46B67CAAFCE864F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E8EF12D6B38FDB0721B996EF /* Pods-BasicIMAPlayer.debug.xcconfig */,
+				90C4E537574A78CF92E4ADDE /* Pods-BasicIMAPlayer.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E93A3D01217A1D5900F971F8 = {
 			isa = PBXGroup;
 			children = (
 				E93A3D0C217A1D5900F971F8 /* BasicIMAPlayer */,
 				E93A3D0B217A1D5900F971F8 /* Products */,
+				B7993583B46B67CAAFCE864F /* Pods */,
+				0C8E2C9E5D21E5A4842A5303 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,9 +99,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E93A3D1C217A1D5A00F971F8 /* Build configuration list for PBXNativeTarget "BasicIMAPlayer" */;
 			buildPhases = (
+				74A48D3593E8F42749D99CC0 /* [CP] Check Pods Manifest.lock */,
 				E93A3D06217A1D5900F971F8 /* Sources */,
 				E93A3D07217A1D5900F971F8 /* Frameworks */,
 				E93A3D08217A1D5900F971F8 /* Resources */,
+				377D2138E55DA707EF718C0C /* [CP] Embed Pods Frameworks */,
+				DA2D434EEF87B06646113C51 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,6 +160,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		377D2138E55DA707EF718C0C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74A48D3593E8F42749D99CC0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BasicIMAPlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA2D434EEF87B06646113C51 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BasicIMAPlayer/Pods-BasicIMAPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E93A3D06217A1D5900F971F8 /* Sources */ = {
@@ -284,6 +371,7 @@
 		};
 		E93A3D1D217A1D5A00F971F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8EF12D6B38FDB0721B996EF /* Pods-BasicIMAPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +390,7 @@
 		};
 		E93A3D1E217A1D5A00F971F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90C4E537574A78CF92E4ADDE /* Pods-BasicIMAPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

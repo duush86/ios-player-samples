@@ -21,37 +21,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Eyd-aR-Ae7">
-                                <rect key="frame" x="0.0" y="93" width="414" height="284"/>
+                                <rect key="frame" x="0.0" y="93" width="414" height="803"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yvn-5o-LW9">
-                                    <size key="itemSize" width="411" height="229"/>
+                                    <size key="itemSize" width="411" height="289"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SampleCollectionViewCell" id="sZe-db-XUR" userLabel="SampleCollectionViewCell" customClass="SampleCollectionViewCell" customModule="VideoCloudBasicPlayer" customModuleProvider="target">
-                                        <rect key="frame" x="1.5" y="0.0" width="411" height="229"/>
+                                        <rect key="frame" x="1.5" y="0.0" width="411" height="289"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bGW-Po-otD">
-                                            <rect key="frame" x="0.0" y="0.0" width="411" height="229"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="411" height="289"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8E-5W-pl5">
-                                                    <rect key="frame" x="86" y="50" width="239" height="129"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="411" height="289"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="centerX" secondItem="bGW-Po-otD" secondAttribute="centerX" id="2BU-Ym-dDc"/>
-                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="leading" secondItem="bGW-Po-otD" secondAttribute="leading" constant="86" id="2pP-TS-1FJ"/>
-                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="top" secondItem="bGW-Po-otD" secondAttribute="top" constant="50" id="AZB-Kt-Rv1"/>
-                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="centerY" secondItem="bGW-Po-otD" secondAttribute="centerY" id="AaJ-Gw-9nh"/>
+                                                <constraint firstAttribute="bottom" secondItem="G8E-5W-pl5" secondAttribute="bottom" id="53h-fS-O3v"/>
+                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="leading" secondItem="bGW-Po-otD" secondAttribute="leading" id="GcE-qk-Cub"/>
+                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="top" secondItem="bGW-Po-otD" secondAttribute="top" id="Lhs-kr-XGW"/>
+                                                <constraint firstAttribute="trailing" secondItem="G8E-5W-pl5" secondAttribute="trailing" id="Ulq-XI-ihj"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="411" height="229"/>
+                                        <size key="customSize" width="411" height="289"/>
                                         <connections>
-                                            <outlet property="videoContainerView" destination="G8E-5W-pl5" id="hSX-cy-0OI"/>
+                                            <outlet property="videoPlayer" destination="G8E-5W-pl5" id="q3R-l9-VhH"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -59,7 +59,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Eyd-aR-Ae7" secondAttribute="bottom" constant="485" id="1x7-jl-4Zs"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Eyd-aR-Ae7" secondAttribute="bottom" constant="-34" id="1x7-jl-4Zs"/>
                             <constraint firstItem="Eyd-aR-Ae7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FU5-77-qB8"/>
                             <constraint firstItem="Eyd-aR-Ae7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="49" id="R0a-Lc-uia"/>
                             <constraint firstItem="Eyd-aR-Ae7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="cAh-2i-OtM"/>

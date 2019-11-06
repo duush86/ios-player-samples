@@ -9,11 +9,19 @@ import AVKit
 import UIKit
 import BrightcovePlayerSDK
 
-let kViewControllerPlaybackServicePolicyKey = "BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e"
-let kViewControllerAccountID = "4800266849001"
-let kViewControllerVideoID = "5255514387001"
+struct ConfigConstants {
+    static let AccountID = "4800266849001"
+    static let PolicyKey = "BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e"
+    static let videoID = "5255514387001"
+    static let videoID2 = "6030821731001"
+}
 
-class ViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource {
+class ViewController: BaseVideoViewController, UICollectionViewDelegate , UICollectionViewDataSource {
+
+    //let sharedSDKManager = BCOVPlayerSDKManager.shared()
+
+    
+    let videosArray: [String] = [ConfigConstants.videoID,ConfigConstants.videoID2]
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -21,30 +29,55 @@ class ViewController: UIViewController , UICollectionViewDelegate , UICollection
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SampleCollectionViewCell", for: indexPath) as! SampleCollectionViewCell
         
-        setupPlayer(forView: cell.videoContainerView)
+      //  for video in videosArray {
         
+        cell.pbController = createNewPlaybackController(onView: cell.videoPlayer)
+        //playbackController?.setVideos([])
+        
+        retrieveVideo(withVideo: videosArray[indexPath.item], forPBC: cell.pbController! )
+       // }
         return cell
     }
     
-    
-    let sharedSDKManager = BCOVPlayerSDKManager.shared()
-    let playbackService = BCOVPlaybackService(accountId: kViewControllerAccountID, policyKey: kViewControllerPlaybackServicePolicyKey)
-    let playbackController :BCOVPlaybackController
+    private func retrieveVideo(withVideo video: String, forPBC playbackController: BCOVPlaybackController) {
+                      
+           // Retrieve a playlist through the BCOVPlaybackService
+           let playbackServiceRequestFactory = BCOVPlaybackServiceRequestFactory(accountId: ConfigConstants.AccountID, policyKey: ConfigConstants.PolicyKey)
+           
+           let playbackService = BCOVPlaybackService(requestFactory: playbackServiceRequestFactory)
+           
+        
+        playbackService?.findVideo(withVideoID: video, parameters: nil, completion: { [weak self] (bcvideo: BCOVVideo?, jsonResponse: [AnyHashable:Any]?, error: Error?) in
+           
+            if let bcv = bcvideo {
+             
+                playbackController.setVideos([bcv] as NSFastEnumeration)
 
-    required init?(coder aDecoder: NSCoder) {
-        playbackController = (sharedSDKManager?.createPlaybackController())!
-
-        super.init(coder: aDecoder)
-
-        playbackController.delegate = self
-        playbackController.isAutoAdvance = true
-        playbackController.isAutoPlay = true
+             
+             } else {
+                print("No video for ID \"\(video)\" was found.")
+                
+            }
+            
+        } )
+        
     }
+        
+        
+        //(with: video, parameters: queryParams, completion: { [weak self] (bcvideo: BCOVVideo?, jsonResponse: [AnyHashable:Any]?, error: Error?) in
+               
+               //self?.refreshControl.endRefreshing()
+               
+              
+      
+
     
     override func viewDidLoad() {
         
@@ -52,83 +85,14 @@ class ViewController: UIViewController , UICollectionViewDelegate , UICollection
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        
+        //retrievePlaylist()
+        
     }
     
-    func requestContentFromPlaybackService() {
-        playbackService?.findVideo(withVideoID: kViewControllerVideoID, parameters: nil) { (video: BCOVVideo?, jsonResponse: [AnyHashable: Any]?, error: Error?) -> Void in
-            
-            if let v = video {
-                self.playbackController.setVideos([v] as NSArray)
-            } else {
-                print("ViewController Debug - Error retrieving video: \(error?.localizedDescription ?? "unknown error")")
-            }
-        }
-    }
+ 
+    
+  
 
-    func setupPlayer(forView videoContainerView: UIView){
-        
-                 //Set up our player view. Create with a standard VOD layout.
-                let options = BCOVPUIPlayerViewOptions()
-                options.showPictureInPictureButton = true
-        
-                guard let playerView = BCOVPUIPlayerView(playbackController: self.playbackController, options: options, controlsView: BCOVPUIBasicControlView.withVODLayout()) else {
-                    return
-                }
-        
-                playerView.delegate = self
-        
-                // Install in the container view and match its size.
-                videoContainerView.addSubview(playerView)
-                playerView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    playerView.topAnchor.constraint(equalTo: videoContainerView.topAnchor),
-                    playerView.rightAnchor.constraint(equalTo: videoContainerView.rightAnchor),
-                    playerView.leftAnchor.constraint(equalTo: videoContainerView.leftAnchor),
-                    playerView.bottomAnchor.constraint(equalTo: videoContainerView.bottomAnchor)
-                ])
-        
-                // Associate the playerView with the playback controller.
-                playerView.playbackController = playbackController
-        
-                requestContentFromPlaybackService()
-        
-    }
-    
-}
-
-
-extension ViewController: BCOVPlaybackControllerDelegate {
-    
-    func playbackController(_ controller: BCOVPlaybackController!, didAdvanceTo session: BCOVPlaybackSession!) {
-        print("Advanced to new session")
-    }
-    
-    func playbackController(_ controller: BCOVPlaybackController!, playbackSession session: BCOVPlaybackSession!, didProgressTo progress: TimeInterval) {
-        print("Progress: \(progress) seconds")
-    }
-    
-}
-
-extension ViewController: BCOVPUIPlayerViewDelegate {
-    
-    func pictureInPictureControllerDidStartPicture(inPicture pictureInPictureController: AVPictureInPictureController) {
-        print("pictureInPictureControllerDidStartPicture")
-    }
-    
-    func pictureInPictureControllerDidStopPicture(inPicture pictureInPictureController: AVPictureInPictureController) {
-        print("pictureInPictureControllerDidStopPicture")
-    }
-    
-    func pictureInPictureControllerWillStartPicture(inPicture pictureInPictureController: AVPictureInPictureController) {
-        print("pictureInPictureControllerWillStartPicture")
-    }
-    
-    func pictureInPictureControllerWillStopPicture(inPicture pictureInPictureController: AVPictureInPictureController) {
-        print("pictureInPictureControllerWillStopPicture")
-    }
-    
-    func picture(_ pictureInPictureController: AVPictureInPictureController!, failedToStartPictureInPictureWithError error: Error!) {
-        print("failedToStartPictureInPictureWithError \(error.localizedDescription)")
-    }
     
 }

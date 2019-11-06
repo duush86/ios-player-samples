@@ -8,9 +8,7 @@
 import UIKit
 import BrightcovePlayerSDK
 
-class BaseVideoViewController: UIViewController, BCOVPlaybackControllerDelegate {
-
-    @IBOutlet weak var videoContainerView: UIView!
+class BaseVideoViewController: UIViewController,  BCOVPlaybackControllerDelegate {
     
     private lazy var authProxy: BCOVFPSBrightcoveAuthProxy? = {
         // Publisher/application IDs not required for Dynamic Delivery
@@ -30,33 +28,33 @@ class BaseVideoViewController: UIViewController, BCOVPlaybackControllerDelegate 
         playbackController?.pause()
     }
     
-    func createNewPlaybackController(onViewContainer videoContainerView: UIView) {
+    func createNewPlaybackController(onView videoContainerView: UIView) -> BCOVPlaybackController? {
          let playerView: BCOVPUIPlayerView? = {
-               
-               let options = BCOVPUIPlayerViewOptions()
-               options.presentingViewController = self
-               
-               // Create PlayerUI views with normal VOD controls.
-               let controlView = BCOVPUIBasicControlView.withVODLayout()
-               guard let _playerView = BCOVPUIPlayerView(playbackController: nil, options: options, controlsView: controlView) else {
-                   return nil
-               }
-               
-               // Add to parent view
-               self.videoContainerView.addSubview(_playerView)
-               _playerView.translatesAutoresizingMaskIntoConstraints = false
-               NSLayoutConstraint.activate([
-                   _playerView.topAnchor.constraint(equalTo: self.videoContainerView.topAnchor),
-                   _playerView.rightAnchor.constraint(equalTo: self.videoContainerView.rightAnchor),
-                   _playerView.leftAnchor.constraint(equalTo: self.videoContainerView.leftAnchor),
-                   _playerView.bottomAnchor.constraint(equalTo: self.videoContainerView.bottomAnchor)
-               ])
-               
-               // Receive delegate method callbacks
-               _playerView.delegate = self
-               
-               return _playerView
-           }()
+            
+            let options = BCOVPUIPlayerViewOptions()
+            options.presentingViewController = self
+            
+            // Create PlayerUI views with normal VOD controls.
+            let controlView = BCOVPUIBasicControlView.withVODLayout()
+            guard let _playerView = BCOVPUIPlayerView(playbackController: nil, options: options, controlsView: controlView) else {
+                return nil
+            }
+            
+            // Add to parent view
+            videoContainerView.addSubview(_playerView)
+            _playerView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                _playerView.topAnchor.constraint(equalTo: videoContainerView.topAnchor),
+                _playerView.rightAnchor.constraint(equalTo: videoContainerView.rightAnchor),
+                _playerView.leftAnchor.constraint(equalTo: videoContainerView.leftAnchor),
+                _playerView.bottomAnchor.constraint(equalTo: videoContainerView.bottomAnchor)
+            ])
+            
+            // Receive delegate method callbacks
+            _playerView.delegate = self
+            
+            return _playerView
+        }()
         
         // This app shows how to set up your playback controller for playback of FairPlay-protected videos.
         // The playback controller, as well as the download manager will work with either FairPlay-protected
@@ -66,17 +64,18 @@ class BaseVideoViewController: UIViewController, BCOVPlaybackControllerDelegate 
         // Create the session provider chain
         let options = BCOVBasicSessionProviderOptions()
         options.sourceSelectionPolicy = BCOVBasicSourceSelectionPolicy.sourceSelectionHLS(withScheme: kBCOVSourceURLSchemeHTTPS)
-        guard let basicSessionProvider = sdkManager?.createBasicSessionProvider(with: options), let authProxy = self.authProxy else {
-            return
-        }
-        let fairPlaySessionProvider = sdkManager?.createFairPlaySessionProvider(withApplicationCertificate: nil, authorizationProxy: authProxy, upstreamSessionProvider: basicSessionProvider)
+        //guard let basicSessionProvider = sdkManager?.createBasicSessionProvider(with: options), let authProxy = self.authProxy else {
+       //     return
+        //}
+        //let fairPlaySessionProvider = sdkManager?.createFairPlaySessionProvider(withApplicationCertificate: nil, authorizationProxy: authProxy, upstreamSessionProvider: basicSessionProvider)
         
         // Create the playback controller
-        let _playbackController = sdkManager?.createPlaybackController(with: fairPlaySessionProvider, viewStrategy: nil)
+        let _playbackController = sdkManager?.createPlaybackController()
+        //fairPlaySessionProvider, viewStrategy: nil)
         
         // Start playing right away (the default value for autoAdvance is false)
         _playbackController?.isAutoAdvance = true
-        _playbackController?.isAutoPlay = true
+        _playbackController?.isAutoPlay = false
         
         // Register the delegate method callbacks
         _playbackController?.delegate = self
@@ -84,6 +83,8 @@ class BaseVideoViewController: UIViewController, BCOVPlaybackControllerDelegate 
         playerView?.playbackController = _playbackController
         
         playbackController = _playbackController
+        
+        return playbackController!
     }
 
 }
@@ -92,7 +93,7 @@ extension BaseVideoViewController: BCOVPUIPlayerViewDelegate {
     
     func playerView(_ playerView: BCOVPUIPlayerView!, willTransitionTo screenMode: BCOVPUIScreenMode) {
         // Hide the tab bar when we go full screen
-        //tabBarController?.tabBar.isHidden = screenMode == .full
+        tabBarController?.tabBar.isHidden = screenMode == .full
     }
     
 }

@@ -20,7 +20,7 @@ class VideoTableViewCell: UITableViewCell {
         }
     }
     
-    weak var video: BCOVVideo?
+    weak var videoBC: BCOVVideo?
     weak var delegate: VideoTableViewCellDelegate?
     
     override func awakeFromNib() {
@@ -94,7 +94,7 @@ class VideoTableViewCell: UITableViewCell {
     
     func setup(withStreamingVideo video: BCOVVideo, estimatedDownloadSize: Double, thumbnailImage: UIImage?, videoState: VideoState) {
         
-        self.video = video
+        self.videoBC = video
         
         setupTitleLabel(withVideo: video)
         
@@ -194,7 +194,7 @@ class VideoTableViewCell: UITableViewCell {
     }
     
     @IBAction private func downloadButtonPressed(_ button: UIButton) {
-        if let video = video {
+        if let video = videoBC {
             delegate?.performDownload(forVideo: video)
         }
     }

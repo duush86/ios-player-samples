@@ -23,11 +23,15 @@ class VideoManager: NSObject {
     weak var delegate: ReloadDelegate?
     
     var currentVideos: [BCOVVideo]?
+   
     var currentPlaylistTitle: String?
+    
     var currentPlaylistDescription: String?
     
     var imageCacheDictionary: [String:UIImage]?
+    
     var videosTableViewData: [[String:Any]]?
+    
     var estimatedDownloadSizeDictionary: [String:Double]?
     
     // Update the video dictionary array with the current status
@@ -35,6 +39,7 @@ class VideoManager: NSObject {
     func updateStatusForPlaylist() {
         
         guard let _videosTableViewData = videosTableViewData, let statusArray = BCOVOfflineVideoManager.shared()?.offlineVideoStatus() else {
+            
             return
         }
         
@@ -148,9 +153,7 @@ class VideoManager: NSObject {
         
         // Async task to get and store thumbnails
         DispatchQueue.global(qos: .default).async {
-            
-            // videoID is the key in the image cache dictionary
-            guard let videoID = video.properties[kBCOVVideoPropertyKeyId] as? String, let thumbnailSources = video.properties[kBCOVVideoPropertyKeyThumbnailSources] as? [[String:Any]] else {
+                        guard let videoID = video.properties[kBCOVVideoPropertyKeyId] as? String, let thumbnailSources = video.properties[kBCOVVideoPropertyKeyThumbnailSources] as? [[String:Any]] else {
                 return
             }
             

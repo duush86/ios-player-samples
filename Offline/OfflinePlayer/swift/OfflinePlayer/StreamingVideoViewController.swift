@@ -7,13 +7,19 @@
 
 import UIKit
 import BrightcovePlayerSDK
+//Default values
+//struct ConfigConstants {
+//    static let AccountID = "5434391461001"
+//    static let PolicyKey = "BCpkADawqM0T8lW3nMChuAbrcunBBHmh4YkNl5e6ZrKQwPiK_Y83RAOF4DP5tyBF_ONBVgrEjqW6fbV0nKRuHvjRU3E8jdT9WMTOXfJODoPML6NUDCYTwTHxtNlr5YdyGYaCPLhMUZ3Xu61L"
+//    static let PlaylistID = "brightcove-native-sdk-plist"
+//}
 
+//AMC Values
 struct ConfigConstants {
-    static let AccountID = "5434391461001"
-    static let PolicyKey = "BCpkADawqM0T8lW3nMChuAbrcunBBHmh4YkNl5e6ZrKQwPiK_Y83RAOF4DP5tyBF_ONBVgrEjqW6fbV0nKRuHvjRU3E8jdT9WMTOXfJODoPML6NUDCYTwTHxtNlr5YdyGYaCPLhMUZ3Xu61L"
-    static let PlaylistID = "brightcove-native-sdk-plist"
+    static let AccountID = "6096366627001"
+    static let PolicyKey = "BCpkADawqM1dTKVveVdhvi0-ReecFUQKBY9ihFpv_wHFT6Endqh29CPZL-cAyUTQeWwHeb4dfWfSNtThVGAXdT0YfzcT6NVP5iLyEPPCSPKGDZ6qvFmLqkDR2b1UR8xrSoL7nGjRv_f4gYTN"
+    static let PlaylistID = "top-content-amc"
 }
-
 // The Videos View Controller displays a list of HLS videos retrieved
 // from a Brightcove Dynamic Delivery account playlist.
 // You can tap the download button on a video to begin downloading the video.
