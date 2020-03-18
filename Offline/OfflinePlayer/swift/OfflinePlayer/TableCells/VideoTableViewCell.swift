@@ -7,11 +7,13 @@
 
 import UIKit
 import BrightcovePlayerSDK
+import SwiftyJSON
 
 class VideoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
+    @IBOutlet weak var seasonAndEpisode: UILabel!
     @IBOutlet weak var statusButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var progressView: UIProgressView! {
@@ -92,11 +94,20 @@ class VideoTableViewCell: UITableViewCell {
         
     }
     
-    func setup(withStreamingVideo video: BCOVVideo, estimatedDownloadSize: Double, thumbnailImage: UIImage?, videoState: VideoState) {
+    func setup(withStreamingVideo video: BCOVVideo, estimatedDownloadSize: Double, thumbnailImage: UIImage?, videoState: VideoState, videoFields: Any) {
         
         self.videoBC = video
         
-        setupTitleLabel(withVideo: video)
+        //setupTitleLabel(withVideo: video)
+        
+        titleLabel.text = JSON(videoFields)["title"].stringValue
+        
+        titleLabel.textColor = video.usesFairPlay ? UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0) : UIColor.black
+
+        seasonAndEpisode.text = "Season: \(JSON(videoFields)["season"].stringValue) - Episode: \(JSON(videoFields)["episode"].stringValue)"
+
+        
+        //print(JSON(videoFields)["season"].stringValue)
         
         let detailString = getDetailString(forVideo: video)
         
@@ -119,9 +130,23 @@ class VideoTableViewCell: UITableViewCell {
         statusButton.isUserInteractionEnabled = true
     }
     
-    func setup(withOfflineVideo video: BCOVVideo, offlineStatus: BCOVOfflineVideoStatus, downloadSize: Double) {
+    func setup(withOfflineVideo video: BCOVVideo, offlineStatus: BCOVOfflineVideoStatus, downloadSize: Double, custom_fields: Any) {
         
         setupTitleLabel(withVideo: video)
+        
+       // let customForVideo = custom_fields[video[kBCOVVideoPropertyKeyId]]
+        
+        
+        titleLabel.text = JSON(custom_fields)["title"].stringValue
+        
+        titleLabel.textColor = video.usesFairPlay ? UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0) : UIColor.black
+
+        
+        seasonAndEpisode.text = "Season: \(JSON(custom_fields)["season"].stringValue) - Episode: \(JSON(custom_fields)["episode"].stringValue)"
+        
+        titleLabel.textColor = video.usesFairPlay ? UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0) : UIColor.black
+
+       // seasonAndEpisode.text = "Season: \(JSON(videoFields)["season"].stringValue) - Episode: \(JSON(videoFields)["episode"].stringValue)"
         
         let detailString = getDetailString(forVideo: video)
         var twoLineDetailString: String?
@@ -188,6 +213,8 @@ class VideoTableViewCell: UITableViewCell {
     
     private func setupTitleLabel(withVideo video: BCOVVideo) {
         titleLabel.text = video.properties[kBCOVVideoPropertyKeyName] as? String
+        
+        //titleLabel.text = video.properties[kBCOV]
         
         // Use red label to indicate that the video is protected with FairPlay
         titleLabel.textColor = video.usesFairPlay ? UIColor(red: 0.75, green: 0.0, blue: 0.0, alpha: 1.0) : UIColor.black

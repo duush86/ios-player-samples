@@ -34,6 +34,8 @@ class VideoManager: NSObject {
     
     var estimatedDownloadSizeDictionary: [String:Double]?
     
+    var videosCustomFields: [String:Any]?
+    
     // Update the video dictionary array with the current status
     // as reported by the offline video manager
     func updateStatusForPlaylist() {

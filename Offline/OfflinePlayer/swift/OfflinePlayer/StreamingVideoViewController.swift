@@ -7,6 +7,7 @@
 
 import UIKit
 import BrightcovePlayerSDK
+import SwiftyJSON
 //Default values
 //struct ConfigConstants {
 //    static let AccountID = "5434391461001"
@@ -25,6 +26,8 @@ struct ConfigConstants {
 // You can tap the download button on a video to begin downloading the video.
 
 class StreamingVideoViewController: BaseVideoViewController {
+
+    private var nextViewNumber = Int()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -58,6 +61,16 @@ class StreamingVideoViewController: BaseVideoViewController {
         _refreshControl.addTarget(self, action: #selector(handleTableRefresh(_:)), for: .valueChanged)
         return _refreshControl
     }()
+    
+    var shearableVideoFields: [String:Any]?
+//    var videoFields: VideoManager {
+//        get {
+//            return (self.tabBarController!.viewControllers![0] as! StreamingVideoViewController).videoFields
+//        }
+//        set {
+//            (self.tabBarController!.viewControllers![0] as! StreamingVideoViewController).videoFields = newValue
+//        }
+//    }
     
     // MARK: - View Lifecycle
     
@@ -126,6 +139,20 @@ class StreamingVideoViewController: BaseVideoViewController {
                 self?.videoManager.currentPlaylistDescription = playlist.properties[kBCOVPlaylistPropertiesKeyDescription] as? String
                 
                 self?.videoManager.usePlaylist(videos, withBitrate: bitrate)
+                
+                self?.videoManager.videosCustomFields = [String: Any]()
+                
+                for index in (0...(videos.count-1)) {
+                    
+                    //print(JSON(jsonResponse!)["videos"][index]["id"].stringValue)
+                    //print(JSON(jsonResponse!)["videos"][index]["custom_fields"].dictionaryObject)
+
+                    self?.videoManager.videosCustomFields![JSON(jsonResponse!)["videos"][index]["id"].stringValue] = JSON(jsonResponse!)["videos"][index]["custom_fields"].dictionaryObject
+                }
+
+               // print(self?.videoManager.videosCustomFields)
+                self!.shearableVideoFields = self?.videoManager.videosCustomFields
+                
             } else {
                 print("No playlist for ID \"\(ConfigConstants.PlaylistID)\" was found.")
                 self?.tableView.isHidden = true
@@ -158,8 +185,6 @@ class StreamingVideoViewController: BaseVideoViewController {
             UIAlertController.show(withTitle: "Invalid account information", andMessage: "Don't forget to enter your account information at the top of VideosViewController.swift")
         }
     }
-    
-    
 
 }
 
@@ -184,6 +209,7 @@ extension StreamingVideoViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if let videoDictionary = videoManager.videosTableViewData?[indexPath.row], let video = videoDictionary["video"] as? BCOVVideo {
+            playbackController?.allowsExternalPlayback = true
             playbackController?.setVideos([video] as NSFastEnumeration)
         }
     }

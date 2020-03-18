@@ -48,8 +48,17 @@ class DownloadedVideoViewController: BaseVideoViewController {
     private var freeSpaceTimer: Timer?
     private var sessionStartTime: Date?
     
+    var shearableVideoFields: [String:Any]? {
+        get {
+            return (self.tabBarController!.viewControllers![0] as! StreamingVideoViewController).shearableVideoFields
+        }
+        set {
+            (self.tabBarController!.viewControllers![0] as! StreamingVideoViewController).shearableVideoFields = newValue
+        }
+    }
+    
     private lazy var dataSource: DownloadsTableDataSource = {
-        return DownloadsTableDataSource(tableView: tableView)
+        return DownloadsTableDataSource(tableView: tableView,shearable: shearableVideoFields)
     }()
 
     // MARK: - View Lifecycle
@@ -169,6 +178,9 @@ class DownloadedVideoViewController: BaseVideoViewController {
     }
 
     @objc private func updateFreeSpaceLabel() {
+
+        //print(shearableVideoFields)
+
         
         let cMB: Double = (1000 * 1000)
         let cGB = (cMB * 1000)

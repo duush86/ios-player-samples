@@ -29,6 +29,7 @@
 		491576AE19D9F2B700B2E657 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		491576B919D9F2B700B2E657 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		491576BA19D9F2B700B2E657 /* VideoCloudBasicPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCloudBasicPlayerTests.swift; sourceTree = "<group>"; };
+		94258BD42387420C0050474A /* VideoCloudBasicPlayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VideoCloudBasicPlayer-Bridging-Header.h"; sourceTree = "<group>"; };
 		9436E31223736F5E0020D6A4 /* VideoBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoBaseViewController.swift; sourceTree = "<group>"; };
 		9436E314237379D90020D6A4 /* SampleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCollectionViewCell.swift; sourceTree = "<group>"; };
 		9436E315237379D90020D6A4 /* SampleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SampleCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -70,6 +71,7 @@
 		491576A119D9F2B700B2E657 /* VideoCloudBasicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				94258BCD23873D0B0050474A /* CustomClasses */,
 				491576A419D9F2B700B2E657 /* AppDelegate.swift */,
 				491576A619D9F2B700B2E657 /* ViewController.swift */,
 				491576A819D9F2B700B2E657 /* Main.storyboard */,
@@ -125,6 +127,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		94258BCD23873D0B0050474A /* CustomClasses */ = {
+			isa = PBXGroup;
+			children = (
+				94258BD42387420C0050474A /* VideoCloudBasicPlayer-Bridging-Header.h */,
+			);
+			name = CustomClasses;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,7 +171,7 @@
 				TargetAttributes = {
 					4915769E19D9F2B700B2E657 = {
 						CreatedOnToolsVersion = 6.0.1;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 1120;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -409,6 +419,7 @@
 			baseConfigurationReference = 3AC003A9A51DD24BAD5AC1CC /* Pods-VideoCloudBasicPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = QMWN2G5MW4;
 				INFOPLIST_FILE = VideoCloudBasicPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -416,6 +427,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VideoCloudBasicPlayer/VideoCloudBasicPlayer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -425,6 +438,7 @@
 			baseConfigurationReference = DF0D1AC00AD8525A6DAA99DB /* Pods-VideoCloudBasicPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = QMWN2G5MW4;
 				INFOPLIST_FILE = VideoCloudBasicPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -432,6 +446,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VideoCloudBasicPlayer/VideoCloudBasicPlayer-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

@@ -15,6 +15,7 @@ import AVKit
 class SampleCollectionViewCell: UICollectionViewCell {
           
     @IBOutlet weak var videoPlayer: UIView!
+   
     var pbController: BCOVPlaybackController?
     
     override func awakeFromNib() {

@@ -14,14 +14,17 @@ struct ConfigConstants {
     static let PolicyKey = "BCpkADawqM3n0ImwKortQqSZCgJMcyVbb8lJVwt0z16UD0a_h8MpEYcHyKbM8CGOPxBRp0nfSVdfokXBrUu3Sso7Nujv3dnLo0JxC_lNXCl88O7NJ0PR0z2AprnJ_Lwnq7nTcy1GBUrQPr5e"
     static let videoID = "5255514387001"
     static let videoID2 = "6030821731001"
+    static let videoID3 = "6038060892001"
 }
 
 class ViewController: BaseVideoViewController, UICollectionViewDelegate , UICollectionViewDataSource {
+    
+   
 
     //let sharedSDKManager = BCOVPlayerSDKManager.shared()
 
     
-    let videosArray: [String] = [ConfigConstants.videoID,ConfigConstants.videoID2]
+    let videosArray: [String] = [ConfigConstants.videoID3,ConfigConstants.videoID2, ConfigConstants.videoID]
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -29,20 +32,20 @@ class ViewController: BaseVideoViewController, UICollectionViewDelegate , UIColl
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SampleCollectionViewCell", for: indexPath) as! SampleCollectionViewCell
         
-      //  for video in videosArray {
         
         cell.pbController = createNewPlaybackController(onView: cell.videoPlayer)
-        //playbackController?.setVideos([])
+        
+        cell.pbController?.delegate = self
         
         retrieveVideo(withVideo: videosArray[indexPath.item], forPBC: cell.pbController! )
-       // }
+       
         return cell
     }
     
@@ -59,6 +62,8 @@ class ViewController: BaseVideoViewController, UICollectionViewDelegate , UIColl
             if let bcv = bcvideo {
              
                 playbackController.setVideos([bcv] as NSFastEnumeration)
+                
+                //print(bcv.properties[kBCOVVideoPropertyKeyTextTracks])
 
              
              } else {
@@ -69,13 +74,6 @@ class ViewController: BaseVideoViewController, UICollectionViewDelegate , UIColl
         } )
         
     }
-        
-        
-        //(with: video, parameters: queryParams, completion: { [weak self] (bcvideo: BCOVVideo?, jsonResponse: [AnyHashable:Any]?, error: Error?) in
-               
-               //self?.refreshControl.endRefreshing()
-               
-              
       
 
     
@@ -84,9 +82,11 @@ class ViewController: BaseVideoViewController, UICollectionViewDelegate , UIColl
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+
+//        self.modalTransitionStyle = .coverVertical
+//        
+//        self.modalPresentationStyle = .fullScreen
         
-        
-        //retrievePlaylist()
         
     }
     

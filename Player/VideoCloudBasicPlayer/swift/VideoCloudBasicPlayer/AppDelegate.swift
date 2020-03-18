@@ -34,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !success {
             print("AppDelegate Debug - Error setting AVAudioSession category.  Because of this, there may be no sound. \(categoryError!)")
         }
+        
+        
+        
+
 
         return true
     }

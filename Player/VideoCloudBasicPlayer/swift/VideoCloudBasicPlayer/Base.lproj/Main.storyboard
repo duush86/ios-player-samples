@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,15 +38,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8E-5W-pl5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="411" height="289"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="411" height="200"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="200" id="ZQb-XI-aG4"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="G8E-5W-pl5" secondAttribute="bottom" id="53h-fS-O3v"/>
-                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="leading" secondItem="bGW-Po-otD" secondAttribute="leading" id="GcE-qk-Cub"/>
-                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="top" secondItem="bGW-Po-otD" secondAttribute="top" id="Lhs-kr-XGW"/>
-                                                <constraint firstAttribute="trailing" secondItem="G8E-5W-pl5" secondAttribute="trailing" id="Ulq-XI-ihj"/>
+                                                <constraint firstAttribute="trailing" secondItem="G8E-5W-pl5" secondAttribute="trailing" id="b2Y-wJ-2E2"/>
+                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="top" secondItem="bGW-Po-otD" secondAttribute="top" id="d7H-yH-RmP"/>
+                                                <constraint firstItem="G8E-5W-pl5" firstAttribute="leading" secondItem="bGW-Po-otD" secondAttribute="leading" id="ne3-Qg-FVo"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="411" height="289"/>

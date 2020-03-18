@@ -40,9 +40,10 @@ extension StreamingTableDataSource: UITableViewDataSource {
             let video = videoDictionary["video"] as? BCOVVideo,
             let videoId = video.properties[kBCOVVideoPropertyKeyId] as? String,
             let estimatedDownloadSize = videoManager?.estimatedDownloadSizeDictionary?[videoId],
+            let custom_fields = videoManager?.videosCustomFields?[videoId],
             let state = videoDictionary["state"] as? VideoState {
             let thumbnailImage = videoManager?.imageCacheDictionary?[videoId]
-            cell.setup(withStreamingVideo: video, estimatedDownloadSize: estimatedDownloadSize, thumbnailImage: thumbnailImage, videoState: state)
+            cell.setup(withStreamingVideo: video, estimatedDownloadSize: estimatedDownloadSize, thumbnailImage: thumbnailImage, videoState: state, videoFields: custom_fields)
             cell.delegate = self
         }
         

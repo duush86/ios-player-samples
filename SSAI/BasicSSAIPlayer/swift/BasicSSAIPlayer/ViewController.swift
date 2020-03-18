@@ -12,10 +12,10 @@ import BrightcoveSSAI
 
 // ** Customize these values with your own account information **
 struct Constants {
-    static let AccountID = "5434391461001"
-    static let PlaybackServicePolicyKey = "BCpkADawqM0T8lW3nMChuAbrcunBBHmh4YkNl5e6ZrKQwPiK_Y83RAOF4DP5tyBF_ONBVgrEjqW6fbV0nKRuHvjRU3E8jdT9WMTOXfJODoPML6NUDCYTwTHxtNlr5YdyGYaCPLhMUZ3Xu61L"
-    static let VideoId = "5702141808001"
-    static let AdConfigId = "0e0bbcd1-bba0-45bf-a986-1288e5f9fc85"
+    static let AccountID = "6030890615001"
+    static let PlaybackServicePolicyKey = "BCpkADawqM1i_FJNjvAkIGSdf87hp5kdAFZviorkyB6fmUUnTROA3BFI2lkqkicjKJn_869yRl7BDIkMzU62dTX02h7N2pw7cgUb0UNCbs2Ql32xu6nu91DqyYeQhc8xFMHs2oEuEQjyevDh"
+    static let VideoId = "6131652466001"
+    static let AdConfigId = "live.D-Zwvg9MAbapFXU7nKSwdPPEKOhmfHxMA9fOEKxTi3ZSRxNyWCyxW16wN4C7n6EoSPoN7nq2Yu5ybTLkFJ1U7lWEGVZNhqK-wSg"
 }
 
 class ViewController: UIViewController {

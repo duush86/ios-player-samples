@@ -21,7 +21,8 @@ class DownloadManager: NSObject {
     private var videoPreloadQueue: [VideoDownload] = []
     private var videoDownloadQueue: [VideoDownload] = []
     private var downloadInProgress = false
-    
+    var videosCustomFields: [String:Any]?
+
     weak var delegate: ReloadDelegate?
     
     func doDownload(forVideo video: BCOVVideo) {

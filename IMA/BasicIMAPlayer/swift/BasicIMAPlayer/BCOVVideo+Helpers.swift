@@ -20,10 +20,17 @@ extension BCOVVideo {
             // The BCOVIMA plugin will look for the presence of kBCOVIMAAdTag in
             // the video's properties when using server side ad rules. This URL returns
             // a VMAP response that is handled by the Google IMA library.
-            if var updatedProperties = mutableVideo.properties {
-                updatedProperties[kBCOVIMAAdTag] = vmapTag
-                mutableVideo.properties = updatedProperties
-            }
+//            if var updatedProperties = mutableVideo.properties {
+//                updatedProperties[kBCOVIMAAdTag] = vmapTag
+//                mutableVideo.properties = updatedProperties
+//            }
+            
+            
+            let adTagURLString = IMAConfig.VMAPResponseAdTag
+
+            let prerollCuePount = BCOVCuePoint.beforeCuePointOfType(kBCOVIMACuePointTypeAd, properties: [kBCOVIMAAdTag: adTagURLString as Any])
+
+            mutableVideo.cuePoints = BCOVCuePointCollection(cuePoint: prerollCuePount)
         }
         
     }

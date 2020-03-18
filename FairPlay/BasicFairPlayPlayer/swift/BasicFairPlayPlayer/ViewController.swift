@@ -6,17 +6,22 @@
 //
 
 import UIKit
+import AVFoundation
 
 // Add your Brightcove account and video information here.
 // The video should be encrypted with FairPlay
-let kViewControllerVideoCloudAccountId = ""
-let kViewControllerVideoCloudPolicyKey = ""
-let kViewControllerVideoReferenceId = ""
+let kViewControllerVideoCloudAccountId = "x"
+let kViewControllerVideoCloudPolicyKey = "x"
+let kViewControllerVideoReferenceId = "x"
 
 // If you are using Dynamic Delivery you don't need to set these
 let kViewControllerFairPlayApplicationId = ""
 let kViewControllerFairPlayPublisherId = ""
 
+enum ProgramError: Error {
+       case missingApplicationCertificate
+       case noCKCReturnedByKSM
+   }
 
 class ViewController: UIViewController, BCOVPlaybackControllerDelegate {
     let playbackService = BCOVPlaybackService(accountId: kViewControllerVideoCloudAccountId, policyKey: kViewControllerVideoCloudPolicyKey)
@@ -40,7 +45,7 @@ class ViewController: UIViewController, BCOVPlaybackControllerDelegate {
         
         // This shows the two ways of using the Brightcove FairPlay session provider:
         // Set to true for Dynamic Delivery; false for a legacy Video Cloud account
-        let using_dynamic_delivery = true
+        let using_dynamic_delivery = false
         
         if (( using_dynamic_delivery ))
         {
@@ -50,8 +55,11 @@ class ViewController: UIViewController, BCOVPlaybackControllerDelegate {
             // You can just load and play your FairPlay videos.
             
             // If you are using Dynamic Delivery, you can pass nil for the publisherId and applicationId,
-            self.fairPlayAuthProxy = BCOVFPSBrightcoveAuthProxy(publisherId: nil,
-                                                                applicationId: nil)
+            //self.fairPlayAuthProxy = BCOVFPSBrightcoveAuthProxy(publisherId: nil,
+                                                              //  applicationId: nil)
+            //self.fairPlayAuthProxy = BCOVFPSAuthorizationProxy()
+            
+            
             
             // Create chain of session providers
             let psp = sdkManager?.createBasicSessionProvider(with:nil)
@@ -92,28 +100,80 @@ class ViewController: UIViewController, BCOVPlaybackControllerDelegate {
             // that we have an application certificate.
             
             // Retrieve application certificate using the FairPlay auth proxy
-            self.fairPlayAuthProxy = BCOVFPSBrightcoveAuthProxy(publisherId: kViewControllerFairPlayPublisherId,
-                                                                applicationId: kViewControllerFairPlayApplicationId)
+            self.fairPlayAuthProxy = BCOVFPSBrightcoveAuthProxy(publisherId: kViewControllerFairPlayPublisherId, applicationId: kViewControllerFairPlayApplicationId)
             
-            self.fairPlayAuthProxy?.retrieveApplicationCertificate() { [weak self] (applicationCertificate: Data?, error: Error?) -> Void in
-                guard let appCert = applicationCertificate else
-                {
-                    print("ViewController Debug - Error retrieving app certificate: %@", error!)
-                    return
-                }
+//            self.fairPlayAuthProxy =
+//
+//            self.fairPlayAuthProxy?.retrieveApplicationCertificate() { [weak self] (applicationCertificate: Data?, error: Error?) -> Void in
+//                guard let appCert = applicationCertificate else
+//                {
+//                    print("ViewController Debug - Error retrieving app certificate: %@", error!)
+//                    return
+//                }
+//                guard let strongSelf = self else {
+//                    return
+//                }
+            
+            let kVideoURLString: String = "https://ampas-2019-staging.akamaized.net/wmt:WMT1/Case-575206_V8_hls/Case-575206_V8-playlist.m3u8"
+            
+            let videoURL = URL(string: kVideoURLString)
+            let source = BCOVSource(url: videoURL, deliveryMethod: kBCOVSourceDeliveryHLS, properties: nil)
+            let video = BCOVVideo(source: source, cuePoints: nil, properties: nil)
+            
+            self.fairPlayAuthProxy?.fpsBaseURL = URL(string: "https://fp-keyos.licensekeyserver.com/getkey")
+            
+            var appCert: Data?
+                       
+
+                       do {
+                           try appCert   = requestApplicationCertificate()
+
+                       } catch  {
+                           print("problem gathering the app cert")
+                           
+                       }
+            
+       //     self.fairPlayAuthProxy?.encryptedContentKey(forContentKeyIdentifier: <#T##String#>, contentKeyRequest: <#T##Data#>, source: source, options: <#T##[AnyHashable : Any]?#>, completionHandler: <#T##(URLResponse?, Data?, Error?) -> Void#>)
+            
+          //  var resourceLoadingRequest: AVAssetResourceLoadingRequest?
+            
+            //let contentKeyIdentifierURL = resourceLoadingRequest?.request.url
+            
+            //let spcData = try resourceLoadingRequest.streamingContentKeyRequestData(forApp: appCert, contentIdentifier: assetIDData, options: nil)
+            
+           // let postString = "spc=\(spcData.base64EncodedString())&assetId=\(assetID)"
+
+            let postData: Data = "1.".data(using: .ascii, allowLossyConversion: true)!
+            
+            let assetId = "skd://fp-keyos.licensekeyserver.com/getkey?kid=db0217369a3b4b9a8ebcd8978efb51ca"
+            //self.fairPlayAuthProxy?.encryptedContentKey(forContentKeyIdentifier: assetId , contentKeyRequest: ckr  , source: source!, options: nil, completionHandler: { [weak self] (response: URLResponse?, data: Data? ,error: Error?) -> Void in
+                    
+            //    guard let response = response else {
+                    
+            //        print("Error returning data")
+            //        return
+            //    }
                 
-                guard let strongSelf = self else {
-                    return
-                }
+            //    print("The response: \(response)")
+            //    print("The data: \(data)")
+
+                
+                    
+          //  })
+           // self.fairPlayAuthProxy?.contentIdentifier(from: "skd://fp-keyos.licensekeyserver.com/getkey?kid=db0217369a3b4b9a8ebcd8978efb51ca")
+            
+           
+            
+            //self.fairPlayAuthProxy?.
                 
                 // Create chain of session providers
                 let psp = sdkManager?.createBasicSessionProvider(with:nil)
                 let fps = sdkManager?.createFairPlaySessionProvider(withApplicationCertificate:appCert,
-                                                                    authorizationProxy:strongSelf.fairPlayAuthProxy!,
+                                                                    authorizationProxy:fairPlayAuthProxy!,
                                                                     upstreamSessionProvider:psp)
                 
                 // Create the playback controller
-                let playbackController = sdkManager?.createPlaybackController(with:fps, viewStrategy:nil)
+            var playbackController = sdkManager?.createPlaybackController(with:fps, viewStrategy:nil)
                 
                 playbackController?.isAutoAdvance = false
                 playbackController?.isAutoPlay = true
@@ -121,34 +181,67 @@ class ViewController: UIViewController, BCOVPlaybackControllerDelegate {
                 
                 if let _view = playbackController?.view {
                     _view.translatesAutoresizingMaskIntoConstraints = false
-                    strongSelf.videoContainerView.addSubview(_view)
+                    videoContainerView.addSubview(_view)
                     NSLayoutConstraint.activate([
-                        _view.topAnchor.constraint(equalTo: strongSelf.videoContainerView.topAnchor),
-                        _view.rightAnchor.constraint(equalTo: strongSelf.videoContainerView.rightAnchor),
-                        _view.leftAnchor.constraint(equalTo: strongSelf.videoContainerView.leftAnchor),
-                        _view.bottomAnchor.constraint(equalTo: strongSelf.videoContainerView.bottomAnchor)
+                        _view.topAnchor.constraint(equalTo: videoContainerView.topAnchor),
+                        _view.rightAnchor.constraint(equalTo: videoContainerView.rightAnchor),
+                        _view.leftAnchor.constraint(equalTo: videoContainerView.leftAnchor),
+                        _view.bottomAnchor.constraint(equalTo: videoContainerView.bottomAnchor)
                     ])
                 }
 
-                strongSelf.playbackController = playbackController
+            self.playbackController = playbackController
                 
-                strongSelf.requestContentFromPlaybackService()
-                strongSelf.createPlayerView()
-            }
+                requestContentFromPlaybackService()
+                createPlayerView()
+            //}
         }
     }
     
     func requestContentFromPlaybackService() {
-        playbackService?.findVideo(withReferenceID:kViewControllerVideoReferenceId, parameters: nil) { (video: BCOVVideo?, jsonResponse: [AnyHashable: Any]?, error: Error?) -> Void in
-            if video == nil
-            {
-                print("ViewController Debug - Error retrieving video: \(error?.localizedDescription ?? "unknown error")")
-                return
-            }
-            
-            self.playbackController!.setVideos([ video! ] as NSArray)
-        }
+//        playbackService?.findVideo(withReferenceID:kViewControllerVideoReferenceId, parameters: nil) { (video: BCOVVideo?, jsonResponse: [AnyHashable: Any]?, error: Error?) -> Void in
+//            if video == nil
+//            {
+//                print("ViewController Debug - Error retrieving video: \(error?.localizedDescription ?? "unknown error")")
+//                return
+//            }
+//
+//            self.playbackController!.setVideos([ video! ] as NSArray)
+//
+//        }
+        
+        //no drm url http://solutions.brightcove.com/aorozco/FP/Non-Muxed/unencrypted/master.m3u8
+        //drm url https://ampas-2019-staging.akamaized.net/wmt:WMT1/Case-575206_V8_hls/Case-575206_V8-playlist.m3u8
+        
+        let kVideoURLString: String = "https://ampas-2019-staging.akamaized.net/wmt:WMT1/Case-575206_V8_hls/Case-575206_V8-playlist.m3u8"
+        
+        let videoURL = URL(string: kVideoURLString)
+        let source = BCOVSource(url: videoURL, deliveryMethod: kBCOVSourceDeliveryHLS, properties: nil)
+        let video = BCOVVideo(source: source, cuePoints: nil, properties: nil)
+        
+        
+        //video?.usesFairPlay = true
+
+        playbackController?.setVideos([video] as NSFastEnumeration)
     }
+    
+    func requestApplicationCertificate() throws -> Data {
+           
+           // MARK: ADAPT - You must implement this method to retrieve your FPS application certificate.
+           var applicationCertificate: Data? = nil
+           
+               do {
+                   applicationCertificate = try Data(contentsOf:URL(string:"https://fp-keyos.licensekeyserver.net/cert/f248ed452493c77065c030fa9af97b6b.der")!)
+               } catch {
+                   print("Error loading FairPlay application certificate: \(error)")
+               }
+           
+           guard applicationCertificate != nil else {
+               throw ProgramError.missingApplicationCertificate
+           }
+           
+           return applicationCertificate!
+       }
     
     // Create the player view
     func createPlayerView() {

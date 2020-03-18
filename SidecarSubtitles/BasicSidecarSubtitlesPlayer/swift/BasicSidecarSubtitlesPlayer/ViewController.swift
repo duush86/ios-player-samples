@@ -42,6 +42,8 @@ class ViewController: UIViewController {
     private lazy var playerView: BCOVPUIPlayerView? = {
         // Create PlayerUI views with normal VOD controls.
         let controlView = BCOVPUIBasicControlView.withVODLayout()
+       // let controlView = BCOVPUIBasicControlView.layoutViewWithControl(from:. , width: , elasticity: )
+        //let controlView = BCOVPUIBasicControlView.layoutViewWithControl(from: , width: <#T##CGFloat#>, elasticity: <#T##CGFloat#>)
         guard let _playerView = BCOVPUIPlayerView(playbackController: nil, options: nil, controlsView: controlView) else {
             return nil
         }

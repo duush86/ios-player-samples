@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xxp-Bx-dRW">
-                        <rect key="frame" x="126" y="11" width="192" height="47"/>
+                        <rect key="frame" x="126" y="11" width="192" height="70"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEP-QQ-V8y">
                                 <rect key="frame" x="0.0" y="0.0" width="192" height="20.5"/>
@@ -24,14 +24,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season and Episode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPC-27-zeS" userLabel="Season and Episode">
+                                <rect key="frame" x="0.0" y="25.5" width="192" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Duration / Size" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXe-v4-JVM">
-                                <rect key="frame" x="0.0" y="25.5" width="192" height="14.5"/>
+                                <rect key="frame" x="0.0" y="48.5" width="192" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bNx-MW-725">
-                                <rect key="frame" x="0.0" y="45" width="192" height="2"/>
+                                <rect key="frame" x="0.0" y="68" width="192" height="2"/>
                                 <color key="tintColor" red="0.24892729920000001" green="0.1381546025" blue="0.24417504509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                         </subviews>
@@ -72,6 +78,7 @@
             <connections>
                 <outlet property="detailsLabel" destination="fXe-v4-JVM" id="MN6-BH-OEK"/>
                 <outlet property="progressView" destination="bNx-MW-725" id="nIJ-QU-GC9"/>
+                <outlet property="seasonAndEpisode" destination="dPC-27-zeS" id="9NV-fg-gvb"/>
                 <outlet property="statusButton" destination="Vdu-TR-BB6" id="JvW-PV-yot"/>
                 <outlet property="thumbnailImageView" destination="aKF-7e-NxX" id="4BT-X4-7AW"/>
                 <outlet property="titleLabel" destination="tEP-QQ-V8y" id="Nia-Ow-KTz"/>

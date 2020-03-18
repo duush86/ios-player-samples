@@ -30,7 +30,7 @@ class BaseVideoViewController: UIViewController, BCOVPlaybackControllerDelegate 
         playbackController?.pause()
     }
     
-    func createNewPlaybackController(onViewContainer videoContainerView: UIView) {
+    func createNewPlaybackController() {
          let playerView: BCOVPUIPlayerView? = {
                
                let options = BCOVPUIPlayerViewOptions()

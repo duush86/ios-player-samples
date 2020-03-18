@@ -16,12 +16,15 @@ class DownloadsTableDataSource: NSObject {
     
     var downloadSizeDictionary: [String:Double] = [:]
     var offlineTokenArray: [String]?
-    
-    init(tableView: UITableView) {
+    var shearable: [String:Any]?
+
+    init(tableView: UITableView,shearable: [String:Any]?) {
         super.init()
         self.tableView = tableView
         tableView.register(UINib(nibName: "VideoTableViewCell", bundle: nil), forCellReuseIdentifier: videoCellReuseId)
         NotificationCenter.default.addObserver(self, selector: #selector(updateStatus), name: OfflinePlayerNotifications.UpdateStatus, object: nil)
+        self.shearable = shearable.self
+        //print(" Sharable \(shearable)")
         updateStatus()
     }
     
@@ -65,10 +68,16 @@ extension DownloadsTableDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: videoCellReuseId, for: indexPath) as! VideoTableViewCell
+        //print(videoFields)
+        //print(" Sharable \(shearable)")
+
         
-        if let offlineToken = offlineTokenArray?[indexPath.row], let video = BCOVOfflineVideoManager.shared()?.videoObject(fromOfflineVideoToken: offlineToken), let offlineStatus = BCOVOfflineVideoManager.shared()?.offlineVideoStatus(forToken: offlineToken) {
+        if let offlineToken = offlineTokenArray?[indexPath.row],
+           let video = BCOVOfflineVideoManager.shared()?.videoObject(fromOfflineVideoToken: offlineToken),
+           let custom_fields = shearable![video.properties[kBCOVVideoPropertyKeyId] as! String],
+           let offlineStatus = BCOVOfflineVideoManager.shared()?.offlineVideoStatus(forToken: offlineToken) {
             let downloadSize = downloadSizeDictionary[offlineToken] ?? cacheDownloadedSize(forVideo: video, withOfflineToken: offlineToken)
-            cell.setup(withOfflineVideo: video, offlineStatus: offlineStatus, downloadSize: downloadSize)
+            cell.setup(withOfflineVideo: video, offlineStatus: offlineStatus, downloadSize: downloadSize, custom_fields: custom_fields)
             
         }
         

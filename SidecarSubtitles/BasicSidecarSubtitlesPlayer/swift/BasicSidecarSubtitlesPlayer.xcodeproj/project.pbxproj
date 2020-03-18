@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79CE83CAA64AF5FAE2FFEC0F /* Pods_BasicSidecarSubtitlesPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4A8F06082C0BB32ED987B6 /* Pods_BasicSidecarSubtitlesPlayer.framework */; };
 		E9DEE561216E8D250033C285 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DEE560216E8D250033C285 /* AppDelegate.swift */; };
 		E9DEE563216E8D250033C285 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DEE562216E8D250033C285 /* ViewController.swift */; };
 		E9DEE566216E8D250033C285 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9DEE564216E8D250033C285 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC777E78842F84DAE94A92EC /* Pods-BasicSidecarSubtitlesPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicSidecarSubtitlesPlayer.debug.xcconfig"; path = "Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		BF4A8F06082C0BB32ED987B6 /* Pods_BasicSidecarSubtitlesPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BasicSidecarSubtitlesPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C958229E83D6FCA6C2811D3D /* Pods-BasicSidecarSubtitlesPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BasicSidecarSubtitlesPlayer.release.xcconfig"; path = "Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		E9DEE55D216E8D250033C285 /* BasicSidecarSubtitlesPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicSidecarSubtitlesPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9DEE560216E8D250033C285 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9DEE562216E8D250033C285 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79CE83CAA64AF5FAE2FFEC0F /* Pods_BasicSidecarSubtitlesPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		87B9764493B1596FBC6E0EB1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF4A8F06082C0BB32ED987B6 /* Pods_BasicSidecarSubtitlesPlayer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E940A56935B2453BCC354ACC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AC777E78842F84DAE94A92EC /* Pods-BasicSidecarSubtitlesPlayer.debug.xcconfig */,
+				C958229E83D6FCA6C2811D3D /* Pods-BasicSidecarSubtitlesPlayer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E9DEE554216E8D250033C285 = {
 			isa = PBXGroup;
 			children = (
 				E9DEE55F216E8D250033C285 /* BasicSidecarSubtitlesPlayer */,
 				E9DEE55E216E8D250033C285 /* Products */,
+				E940A56935B2453BCC354ACC /* Pods */,
+				87B9764493B1596FBC6E0EB1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9DEE56F216E8D260033C285 /* Build configuration list for PBXNativeTarget "BasicSidecarSubtitlesPlayer" */;
 			buildPhases = (
+				D924239151332C7FD1ADEAB0 /* [CP] Check Pods Manifest.lock */,
 				E9DEE559216E8D250033C285 /* Sources */,
 				E9DEE55A216E8D250033C285 /* Frameworks */,
 				E9DEE55B216E8D250033C285 /* Resources */,
+				0E01D4A3D20488ECBADF7E29 /* [CP] Embed Pods Frameworks */,
+				C04EBAB2C615F59A3E29062F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E01D4A3D20488ECBADF7E29 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C04EBAB2C615F59A3E29062F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BasicSidecarSubtitlesPlayer/Pods-BasicSidecarSubtitlesPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D924239151332C7FD1ADEAB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BasicSidecarSubtitlesPlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E9DEE559216E8D250033C285 /* Sources */ = {
@@ -280,16 +366,17 @@
 		};
 		E9DEE570216E8D260033C285 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC777E78842F84DAE94A92EC /* Pods-BasicSidecarSubtitlesPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = N6UAGD6F2D;
 				INFOPLIST_FILE = BasicSidecarSubtitlesPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.brightcove.BasicSidecarSubtitlesPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.duush-bc-aorozco";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -298,16 +385,17 @@
 		};
 		E9DEE571216E8D260033C285 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C958229E83D6FCA6C2811D3D /* Pods-BasicSidecarSubtitlesPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = N6UAGD6F2D;
 				INFOPLIST_FILE = BasicSidecarSubtitlesPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.brightcove.BasicSidecarSubtitlesPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.duush-bc-aorozco";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
